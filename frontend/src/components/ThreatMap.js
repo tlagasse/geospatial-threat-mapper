@@ -13,15 +13,17 @@ L.Icon.Default.mergeOptions({
 });
 
 // Custom threat marker colors
-const getThreatIcon = (threatType) => {
-  const colors = {
-    malware: 'red',
-    phishing: 'orange',
-    ddos: 'purple',
-    default: 'blue'
-  };
+const getThreatIcon = (confidenceScore) => {
+  // Color-code by confidence score
+  let color = 'blue'; // default
   
-  const color = colors[threatType] || colors.default;
+  if (confidenceScore >= 95) {
+    color = 'red';      // Critical
+  } else if (confidenceScore >= 85) {
+    color = 'orange';   // High
+  } else if (confidenceScore >= 75) {
+    color = 'gold';     // Medium (yellow/gold)
+  }
   
   return L.icon({
     iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
@@ -83,16 +85,18 @@ function ThreatMap() {
           <Marker
             key={threat.id}
             position={[threat.latitude, threat.longitude]}
-            icon={getThreatIcon(threat.threat_type)}
+            icon={getThreatIcon(threat.confidence_score)}
           >
             <Popup>
-              <div>
-                <h3>Threat Detected</h3>
-                <p><strong>IP:</strong> {threat.ip}</p>
-                <p><strong>Type:</strong> {threat.threat_type}</p>
-                <p><strong>Time:</strong> {new Date(threat.timestamp).toLocaleString()}</p>
-              </div>
-            </Popup>
+  <div>
+    <h3>🚨 Threat Detected</h3>
+    <p><strong>IP:</strong> {threat.ip}</p>
+    <p><strong>Location:</strong> {threat.city}, {threat.country}</p>
+    <p><strong>Confidence:</strong> {threat.confidence_score}%</p>
+    <p><strong>Type:</strong> {threat.threat_type}</p>
+    <p><strong>Last Seen:</strong> {new Date(threat.last_seen).toLocaleString()}</p>
+  </div>
+</Popup>
           </Marker>
         ))}
       </MapContainer>

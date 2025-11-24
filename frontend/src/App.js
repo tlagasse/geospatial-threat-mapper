@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import ThreatMap from './components/ThreatMap';
+import StatsPanel from './components/StatsPanel';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <h1>🌍 Geospatial Threat Intelligence Mapper</h1>
         <p>Real-time visualization of cyber threats worldwide</p>
       </header>
+      <StatsPanel />
       <ThreatMap />
     </div>
   );
