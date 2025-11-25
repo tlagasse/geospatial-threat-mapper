@@ -159,13 +159,17 @@ Frontend runs on `http://localhost:3000`
 
 ## 📸 Screenshots
 
-### Global Threat View
-50+ malicious IPs visualized across the world
-![App Screenshot](screenshots/full_map_view.png)
+### Global Threat Overview with Statistics
+![Full View](screenshots/full-view.png)
+*Real-time dashboard showing 50+ threats with statistics panel displaying total count, average confidence, and top affected countries*
 
-### Threat Details
-Click any marker to see IP address, location, confidence score, and timestamp
-![App Screenshot](screenshots/threat_details.png)
+### Threat Cluster Analysis
+![Threat Cluster](screenshots/threat-cluster.png)
+*Dense concentration of threats in specific regions, demonstrating global threat distribution*
+
+### Detailed Threat Information
+![Threat Detail](screenshots/threat-detail.png)
+*Click any marker to view comprehensive threat details including IP address, location, confidence score, and last seen timestamp*
 
 ## 🔄 Data Updates
 
