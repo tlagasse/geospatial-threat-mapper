@@ -35,7 +35,8 @@ const getThreatIcon = (confidenceScore) => {
   });
 };
 
-function ThreatMap() {
+function ThreatMap({ filteredThreats }) {
+  const [allThreats, setAllThreats] = useState([]);
   const [threats, setThreats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,6 +46,7 @@ function ThreatMap() {
     const fetchThreats = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/threats');
+	setAllThreats(response.data);
         setThreats(response.data);
         setLoading(false);
       } catch (err) {
@@ -60,6 +62,15 @@ function ThreatMap() {
     const interval = setInterval(fetchThreats, 30000);
     return () => clearInterval(interval);
   }, []);
+
+// Update threats when filter changes
+useEffect(() => {
+  if (filteredThreats) {
+    setThreats(filteredThreats);
+  } else {
+    setThreats(allThreats);
+  }
+}, [filteredThreats, allThreats]);
 
   if (loading) {
     return <div className="loading">Loading threat data...</div>;
