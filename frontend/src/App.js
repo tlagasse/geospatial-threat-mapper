@@ -9,6 +9,7 @@ function App() {
   const [allThreats, setAllThreats] = useState([]);
   const [filteredThreats, setFilteredThreats] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     const fetchThreats = async () => {
@@ -29,6 +30,27 @@ function App() {
   const handleFilterChange = (filtered) => {
     setFilteredThreats(filtered);
   };
+  
+  const handleRefresh = async () => {
+  setRefreshing(true);
+  try {
+    // Call backend to collect new data
+    await axios.post('http://localhost:5000/api/refresh');
+    
+    // Wait a moment for collection to complete
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Fetch updated threats
+    const response = await axios.get('http://localhost:5000/api/threats');
+    setAllThreats(response.data);
+    setFilteredThreats(response.data);
+    setRefreshing(false);
+  } catch (err) {
+    console.error('Error refreshing data:', err);
+    setRefreshing(false);
+    alert('Failed to refresh data. Please try again.');
+  }
+};
 
   if (loading) {
     return <div className="loading">Loading threat data...</div>;
@@ -37,9 +59,21 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>🌍 Geospatial Threat Intelligence Mapper</h1>
-        <p>Real-time visualization of cyber threats worldwide</p>
-      </header>
+        <div className="header-content">
+          <div>
+            <h1>🌍 Geospatial Threat Intelligence Mapper</h1>
+            <p>Real-time visualization of cyber threats worldwide</p>
+          </div>
+          <button 
+            onClick={handleRefresh} 
+            disabled={refreshing}
+            className="refresh-button"
+          >
+            {refreshing ? '🔄 Refreshing...' : '🔄 Refresh Data'}
+          </button>
+        </div>
+      </header>    
+      
       <StatsPanel />
       <FilterPanel 
         threats={allThreats} 
