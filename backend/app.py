@@ -79,5 +79,40 @@ def get_stats():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/refresh', methods=['POST'])
+def refresh_data():
+    """Trigger data collection from AbuseIPDB"""
+    try:
+        import subprocess
+        import os
+        
+        # Get the path to the collect_threats script
+        script_path = os.path.join(os.path.dirname(__file__), 'collect_threats.py')
+        
+        # Run the collection script
+        result = subprocess.run(
+            ['python', script_path],
+            capture_output=True,
+            text=True,
+            timeout=120  # 2 minute timeout
+        )
+        
+        if result.returncode == 0:
+            return jsonify({
+                'status': 'success',
+                'message': 'Data collection completed successfully'
+            })
+        else:
+            return jsonify({
+                'status': 'error',
+                'message': 'Data collection failed',
+                'error': result.stderr
+            }), 500
+    
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

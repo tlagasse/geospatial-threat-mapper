@@ -7,15 +7,18 @@ A production-ready web platform that visualizes real cyber threats on an interac
 
 ## ✨ Current Features
 
-- **🗺️ Interactive World Map**: Real-time visualization of cyber threats using Leaflet.js
-- **📍 Live Threat Data**: Pulls actual malicious IPs from AbuseIPDB API
+- **🗺️ Interactive World Map**: Real-time visualization using Leaflet.js with smooth zoom and pan
+- **📍 Live Threat Intelligence**: Integrated with AbuseIPDB API - displays actual malicious IPs with 100% confidence scores
 - **🌐 Global Coverage**: Threats from 20+ countries across all continents
-- **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping
-- **💾 SQLite Database**: Stores threat data with metadata (IP, location, confidence, timestamp)
-- **🔴 Threat Markers**: Red pins showing confirmed malicious activity
-- **📊 Detailed Popups**: Click markers to view IP address, location, threat type, and confidence score
-- **🔄 REST API**: Flask backend serving threat data to frontend
-- **📱 Responsive Design**: Works seamlessly on desktop and mobile
+- **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping with city-level precision
+- **💾 SQLite Database**: Persistent storage with optimized schema for geospatial queries
+- **🔴 Color-Coded Markers**: Visual threat severity indicators (red=critical, orange=high, yellow=medium)
+- **📊 Statistics Dashboard**: Real-time metrics showing total threats, average confidence, and top affected countries
+- **🔍 Advanced Filtering**: Filter by country dropdown and search by IP address or city name
+- **🔄 Manual Refresh**: One-click data refresh to fetch latest threats from AbuseIPDB
+- **📱 Responsive Design**: Fully functional on desktop, tablet, and mobile devices
+- **🚀 RESTful API**: Flask backend with `/threats`, `/stats`, and `/refresh` endpoints
+- **⚡ Real-Time Updates**: Dynamic map updates without page reload
 
 ## 🛠️ Tech Stack
 
@@ -109,14 +112,36 @@ Frontend runs on `http://localhost:3000`
 - [x] Add statistics endpoint
 
 ### Phase 2: Enhanced Features 🚧 IN PROGRESS
-- [ ] Automated data collection (cron job/scheduler)
-- [ ] Filter threats by country
-- [ ] Filter threats by confidence score
-- [ ] Filter threats by date range
-- [ ] Search functionality (IP, country, city)
-- [ ] Different colored markers by threat severity
-- [ ] Statistics dashboard
-- [ ] Top countries chart
+### Data Management
+- [ ] Automated data collection script (runs every 6 hours)
+- [x] Manual data refresh button
+- [ ] Increase threat collection to 100+ IPs
+- [ ] Add data deduplication logic
+- [ ] Implement data expiration (remove old threats)
+
+#### Filtering & Search
+- [x] Filter by country dropdown
+- [x] Search bar for IP addresses
+- [x] Search by city name
+- [x] "Clear Filters" button
+- [x] Real-time threat counter
+- [ ] Filter by confidence score slider (75-100%)
+- [ ] Filter by date range picker
+
+#### Visualization Improvements
+- [x] Color-code markers by confidence (infrastructure ready)
+- [x] Improved popup styling with full threat details
+- [ ] Add marker clustering for dense areas
+- [ ] Show threat count badge on clusters
+- [ ] Add fade-in animation for markers
+
+#### Statistics Dashboard
+- [x] Total threats counter
+- [x] Top 10 countries bar chart
+- [x] Average confidence score display
+- [x] Country count display
+- [ ] Threats over time line graph
+- [ ] Most recent threat timestamp
 
 ### Phase 3: Advanced Visualization
 - [ ] Heat map overlay
@@ -159,17 +184,21 @@ Frontend runs on `http://localhost:3000`
 
 ## 📸 Screenshots
 
-### Global Threat Overview with Statistics
-![Full View](screenshots/full-view.png)
-*Real-time dashboard showing 50+ threats with statistics panel displaying total count, average confidence, and top affected countries*
+### Full Application Overview
+![Full Application](screenshots/full-application.png)
+*Complete threat intelligence dashboard featuring real-time statistics, interactive filtering, and global threat visualization with 50+ malicious IPs*
 
-### Threat Cluster Analysis
-![Threat Cluster](screenshots/threat-cluster.png)
-*Dense concentration of threats in specific regions, demonstrating global threat distribution*
+### Statistics Dashboard
+![Statistics Dashboard](screenshots/stats-dashboard.png)
+*Live metrics showing total threats, average confidence score, and top 5 affected countries*
+
+### Interactive Filtering System
+![Active Filters](screenshots/filters-active.png)
+*Filter threats by country, search by IP address or city name, with real-time threat counter*
 
 ### Detailed Threat Information
-![Threat Detail](screenshots/threat-detail.png)
-*Click any marker to view comprehensive threat details including IP address, location, confidence score, and last seen timestamp*
+![Threat Details](screenshots/threat-detail-popup.png)
+*Click any marker to view comprehensive threat intelligence: IP address, precise location, confidence score, threat type, and last seen timestamp*
 
 ## 🔄 Data Updates
 
