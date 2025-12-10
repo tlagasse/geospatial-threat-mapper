@@ -198,6 +198,7 @@ Frontend runs on `http://localhost:3000`
 
 ### Detailed Threat Information
 ![Threat Details](screenshots/threat-detail-popup.png)
+
 *Click any marker to view comprehensive threat intelligence: IP address, precise location, confidence score, threat type, and last seen timestamp*
 
 ## 🔄 Data Updates
