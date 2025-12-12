@@ -3,7 +3,7 @@
 A production-ready web platform that visualizes real cyber threats on an interactive map, combining geospatial intelligence analysis techniques with modern cybersecurity threat hunting.
 
 ## 🚀 Project Status
-✅ **LIVE WITH REAL DATA** - Displaying 50+ real malicious IPs from AbuseIPDB
+✅ PRODUCTION-READY - Automated collection of 100+ real malicious IPs every 6 hours from AbuseIPDB
 
 ## ✨ Current Features
 
