@@ -19,6 +19,7 @@ A production-ready web platform that visualizes real cyber threats on an interac
 - **📱 Responsive Design**: Fully functional on desktop, tablet, and mobile devices
 - **🚀 RESTful API**: Flask backend with `/threats`, `/stats`, and `/refresh` endpoints
 - **⚡ Real-Time Updates**: Dynamic map updates without page reload
+- **🤖 Automated Data Collection**: Background service runs every 6 hours, automatically fetching latest threats
 
 ## 🛠️ Tech Stack
 
@@ -113,7 +114,7 @@ Frontend runs on `http://localhost:3000`
 
 ### Phase 2: Enhanced Features 🚧 IN PROGRESS
 ### Data Management
-- [ ] Automated data collection script (runs every 6 hours)
+- [x] Automated data collection script (runs every 6 hours)
 - [x] Manual data refresh button
 - [ ] Increase threat collection to 100+ IPs
 - [ ] Add data deduplication logic
