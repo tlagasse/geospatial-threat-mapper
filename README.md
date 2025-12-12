@@ -12,7 +12,7 @@ A production-ready web platform that visualizes real cyber threats on an interac
 - **🌐 Global Coverage**: Threats from 20+ countries across all continents
 - **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping with city-level precision
 - **💾 SQLite Database**: Persistent storage with optimized schema for geospatial queries
-- **🔴 Color-Coded Markers**: Visual threat severity indicators (red=critical, orange=high, yellow=medium)
+- **🎨 Color-Coded Markers**: Dynamic threat severity visualization - red (90-100%), orange (75-90%), yellow (50-75%)
 - **📊 Statistics Dashboard**: Real-time metrics showing total threats, average confidence, and top affected countries
 - **🔍 Advanced Filtering**: Filter by country dropdown and search by IP address or city name
 - **🔄 Manual Refresh**: One-click data refresh to fetch latest threats from AbuseIPDB
@@ -116,7 +116,7 @@ Frontend runs on `http://localhost:3000`
 ### Data Management
 - [x] Automated data collection script (runs every 6 hours)
 - [x] Manual data refresh button
-- [ ] Increase threat collection to 100+ IPs
+- [x] Increase threat collection to 100+ IPs
 - [ ] Add data deduplication logic
 - [ ] Implement data expiration (remove old threats)
 
@@ -130,7 +130,7 @@ Frontend runs on `http://localhost:3000`
 - [ ] Filter by date range picker
 
 #### Visualization Improvements
-- [x] Color-code markers by confidence (infrastructure ready)
+- [x] Color-code markers by confidence (fullyt functional with test data)
 - [x] Improved popup styling with full threat details
 - [ ] Add marker clustering for dense areas
 - [ ] Show threat count badge on clusters

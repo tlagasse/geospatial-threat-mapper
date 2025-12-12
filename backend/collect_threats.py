@@ -69,8 +69,8 @@ def fetch_threats():
     }
     
     params = {
-        'limit': 50,
-        'confidenceMinimum': 75
+        'limit': 100,
+        'confidenceMinimum': 90
     }
     
     try:
