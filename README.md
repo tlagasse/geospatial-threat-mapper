@@ -117,7 +117,7 @@ Frontend runs on `http://localhost:3000`
 - [x] Automated data collection script (runs every 6 hours)
 - [x] Manual data refresh button
 - [x] Increase threat collection to 100+ IPs
-- [ ] Add data deduplication logic
+- [x] Add data deduplication logic
 - [ ] Implement data expiration (remove old threats)
 
 #### Filtering & Search

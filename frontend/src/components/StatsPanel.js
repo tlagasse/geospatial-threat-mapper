@@ -59,6 +59,13 @@ function StatsPanel() {
           ))}
         </div>
       </div>
+
+      <div className="stat-card">
+        <div className="stat-label">Last Updated</div>
+        <div className="stat-value-small">
+          {stats.last_update ? new Date(stats.last_update).toLocaleString() : 'N/A'}
+        </div>
+      </div>
       
       <div className="stat-card">
         <div className="stat-value">{stats.top_countries.length}</div>

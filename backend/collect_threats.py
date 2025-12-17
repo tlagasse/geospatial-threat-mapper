@@ -36,6 +36,40 @@ def init_database():
     conn.close()
     print("✅ Database initialized")
 
+def cleanup_old_threats():
+    """Remove threats older than 29 days and handle duplicates"""
+    conn = sqlite3.connect('data/threats.db')
+    cursor = conn.cursor()
+    
+    # Delete threats older than 29 days
+    cursor.execute('''
+        DELETE FROM threats
+        WHERE datetime(timestamp) < datetime('now', '-29 days')
+    ''')
+    deleted_old = cursor.rowcount
+    
+    # Remove duplicate IPs, keeping only the most recent
+    cursor.execute('''
+        DELETE FROM threats
+        WHERE id NOT IN (
+            SELECT MIN(id)
+            FROM threats
+            GROUP BY ip
+        )
+    ''')
+    deleted_dupes = cursor.rowcount
+    
+    conn.commit()
+    conn.close()
+    
+    if deleted_old > 0:
+        print(f"🗑️  Removed {deleted_old} threats older than 29 days")
+    if deleted_dupes > 0:
+        print(f"🗑️  Removed {deleted_dupes} duplicate entries")
+    
+    if deleted_old == 0 and deleted_dupes == 0:
+        print("✅ No old or duplicate threats to remove")
+
 def get_ip_location(ip):
     """Get latitude and longitude for an IP address"""
     try:
@@ -96,6 +130,7 @@ def store_threats(threats):
     cursor = conn.cursor()
     
     stored_count = 0
+    updated_count = 0
     skipped_count = 0
     
     for i, threat in enumerate(threats, 1):
@@ -109,23 +144,42 @@ def store_threats(threats):
         
         if location['latitude'] and location['longitude']:
             try:
-                cursor.execute('''
-                    INSERT OR REPLACE INTO threats 
-                    (ip, latitude, longitude, threat_type, confidence_score, country, city, timestamp, last_seen)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                    ip,
-                    location['latitude'],
-                    location['longitude'],
-                    'malware',
-                    confidence,
-                    location['country'],
-                    location['city'],
-                    datetime.now().isoformat(),
-                    threat.get('lastReportedAt', datetime.now().isoformat())
-                ))
-                stored_count += 1
-                print(f"✅ {location['city']}, {location['country']}")
+                # Check if IP already exists
+                cursor.execute('SELECT id FROM threats WHERE ip = ?', (ip,))
+                existing = cursor.fetchone()
+                
+                if existing:
+                    # Update existing threat with new last_seen time
+                    cursor.execute('''
+                        UPDATE threats 
+                        SET last_seen = ?, confidence_score = ?
+                        WHERE ip = ?
+                    ''', (
+                        datetime.now().isoformat(),
+                        confidence,
+                        ip
+                    ))
+                    updated_count += 1
+                    print(f"🔄 Updated: {location['city']}, {location['country']}")
+                else:
+                    # Insert new threat
+                    cursor.execute('''
+                        INSERT INTO threats 
+                        (ip, latitude, longitude, threat_type, confidence_score, country, city, timestamp, last_seen)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (
+                        ip,
+                        location['latitude'],
+                        location['longitude'],
+                        'malware',
+                        confidence,
+                        location['country'],
+                        location['city'],
+                        datetime.now().isoformat(),
+                        datetime.now().isoformat()
+                    ))
+                    stored_count += 1
+                    print(f"✅ Stored: {location['city']}, {location['country']}")
             except Exception as e:
                 print(f"⚠️  Error: {e}")
                 skipped_count += 1
@@ -137,15 +191,21 @@ def store_threats(threats):
     conn.close()
     
     print(f"\n{'='*60}")
-    print(f"🎉 Successfully stored: {stored_count} threats")
-    print(f"⚠️  Skipped: {skipped_count} threats")
+    print(f"✅ New threats stored: {stored_count}")
+    print(f"🔄 Existing threats updated: {updated_count}")
+    print(f"⚠️  Skipped: {skipped_count}")
 
 def main():
     print("=" * 60)
     print("🌍 Geospatial Threat Intelligence Mapper - Data Collection")
     print("=" * 60 + "\n")
     
+    # Initialize database
     init_database()
+
+    # Clean up old and duplicate threats
+    cleanup_old_threats()
+
     threats = fetch_threats()
     
     if threats:

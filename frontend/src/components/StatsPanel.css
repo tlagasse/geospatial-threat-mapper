@@ -29,6 +29,12 @@
   margin-bottom: 5px;
 }
 
+.stat-value-small {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .stat-label {
   font-size: 0.9rem;
   opacity: 0.9;

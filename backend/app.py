@@ -68,12 +68,22 @@ def get_stats():
             LIMIT 10
         ''')
         by_country = [dict(row) for row in cursor.fetchall()]
+
+        # Get most recent update time
+        cursor.execute('SELECT MAX(timestamp) as last_update FROM threats')
+        last_update = cursor.fetchone()['last_update']
+
+        # Get oldest threat
+        cursor.execute('SELECT MIN(timestamp) as oldest FROM threats')
+        oldest = cursor.fetchone()['oldest']
         
         conn.close()
         
         return jsonify({
             'total_threats': total,
-            'top_countries': by_country
+            'top_countries': by_country,
+            'last_update': last_update,
+            'oldest_threat': oldest
         })
     
     except Exception as e:
