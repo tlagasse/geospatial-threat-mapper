@@ -118,7 +118,7 @@ Frontend runs on `http://localhost:3000`
 - [x] Manual data refresh button
 - [x] Increase threat collection to 100+ IPs
 - [x] Add data deduplication logic
-- [ ] Implement data expiration (remove old threats)
+- [x] Implement data expiration (remove old threats)
 
 #### Filtering & Search
 - [x] Filter by country dropdown
