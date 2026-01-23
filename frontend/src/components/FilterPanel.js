@@ -64,6 +64,7 @@ const getCountryName = (code) => {
 function FilterPanel({ threats, onFilterChange }) {
   const [selectedCountry, setSelectedCountry] = useState('all');
   const [searchIP, setSearchIP] = useState('');
+  const [confidenceMin, setConfidenceMin] = useState(50);
 
   // Get unique country codes and convert to full names
 const countryCodesSet = new Set(threats.map(t => t.country));
@@ -75,16 +76,22 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
   const handleCountryChange = (e) => {
     const country = e.target.value;
     setSelectedCountry(country);
-    applyFilters(country, searchIP);
+    applyFilters(country, searchIP, confidenceMin);
   };
 
   const handleSearchChange = (e) => {
     const search = e.target.value;
     setSearchIP(search);
-    applyFilters(selectedCountry, search);
+    applyFilters(selectedCountry, search, confidenceMin);
   };
 
-  const applyFilters = (country, search) => {
+  const handleConfidenceChange = (e) => {
+    const minConfidence = parseInt(e.target.value);
+    setConfidenceMin(minConfidence);
+    applyFilters(selectedCountry, searchIP, minConfidence);
+  };
+
+  const applyFilters = (country, search, minConfidence) => {
     let filtered = [...threats];
 
     // Filter by country
@@ -100,12 +107,18 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
       );
     }
 
+    filtered = filtered.filter(t => {
+      const score = t.confidence_score || 100;
+      return score >= minConfidence;
+    });
+
     onFilterChange(filtered);
   };
 
   const handleReset = () => {
     setSelectedCountry('all');
     setSearchIP('');
+    setConfidenceMin(50);
     onFilterChange(threats);
   };
 
@@ -138,6 +151,24 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
           placeholder="e.g., 192.168 or Beijing"
           className="filter-input"
         />
+      </div>
+
+      <div className="filter-group">
+        <label htmlFor="confidence-slider">🎚️ Min Confidenc: {confidenceMin}%</label>
+        <input
+          id="confidence-slider"
+          type="range"
+          min="50"
+          max="100"
+          value={confidenceMin}
+          onChange={handleConfidenceChange}
+          className="confidence-slider"
+        />
+        <div className="slider-labels">
+          <span>50%</span>
+          <span>75%</span>
+          <span>100%</span>
+        </div>
       </div>
 
       <button onClick={handleReset} className="reset-button">

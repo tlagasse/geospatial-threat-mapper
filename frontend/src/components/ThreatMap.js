@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'leaflet/dist/leaflet.css';
+import './MarkerCluster.css';
+import './ThreatMap.css';
 import L from 'leaflet';
 import axios from 'axios';
 
@@ -81,8 +84,8 @@ useEffect(() => {
   }
 
   return (
-    <div className="map-container">
-      <MapContainer 
+  <div className="map-container">
+    <MapContainer 
         center={[20, 0]} 
         zoom={2} 
         style={{ height: '100vh', width: '100%' }}
@@ -91,7 +94,12 @@ useEffect(() => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        
+      
+      <MarkerClusterGroup
+        showCoverageOnHover={false}
+        spiderfyDistanceMultiplier={2}
+        maxClusterRadius={50}
+      >
         {threats.map((threat) => (
           <Marker
             key={threat.id}
@@ -110,6 +118,9 @@ useEffect(() => {
 </Popup>
           </Marker>
         ))}
+      </MarkerClusterGroup>
+
+
       </MapContainer>
     </div>
   );

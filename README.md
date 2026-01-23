@@ -15,6 +15,8 @@ A production-ready web platform that visualizes real cyber threats on an interac
 - **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping with city-level precision
 - **💾 SQLite Database**: Persistent storage with automated cleanup (30-day expiration)
 - **🎨 Color-Coded Markers**: Dynamic threat severity visualization - red (90-100%), orange (75-90%), yellow (50-75%)
+- **🕷️ Marker Clustering**: Automatic grouping of nearby threats with count badges - click to expand and explore
+- **🎨 Smooth Animations**: Fade-in effects for markers, smooth cluster transitions, and hover effects
 - **📊 Statistics Dashboard**: Real-time metrics showing total threats, average confidence, top countries, and last update time
 - **🔍 Advanced Filtering**: 
   - Filter by country dropdown with full country names
@@ -162,12 +164,13 @@ sudo systemctl start threat-collector.service
 - [x] Last updated timestamp display
 
 ### Phase 3: Advanced Visualization 🚧 NEXT
-- [ ] Marker clustering for dense areas
-- [ ] Heat map overlay
+- [x] Marker clustering for dense areas
+- [x] Cluster count badges
+- [x] Fade-in animations for marker
+- [x] Smooth cluster animations on hover
 - [ ] Timeline/historical view
 - [ ] Animation of threats over time
 - [ ] Threat type categorization
-- [ ] Fade-in animations for markers
 
 ### Phase 4: Intelligence Features
 - [ ] Pattern-of-life analysis for persistent IPs

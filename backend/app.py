@@ -24,7 +24,11 @@ def get_threats():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM threats ORDER BY confidence_score DESC')
+        cursor.execute('''
+            SELECT * FROM threats
+            ORDER BY timestamp DESC
+            LIMIT 100
+        ''')
         rows = cursor.fetchall()
         conn.close()
         

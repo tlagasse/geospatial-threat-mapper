@@ -1,0 +1,53 @@
+/* Marker Cluster Base Styles */
+.marker-cluster-small {
+  background-color: rgba(255, 215, 0, 0.6);
+}
+
+.marker-cluster-small div {
+  background-color: rgba(255, 215, 0, 0.9);
+  color: white;
+  font-weight: bold;
+}
+
+.marker-cluster-medium {
+  background-color: rgba(255, 140, 0, 0.6);
+}
+
+.marker-cluster-medium div {
+  background-color: rgba(255, 140, 0, 0.9);
+  color: white;
+  font-weight: bold;
+}
+
+.marker-cluster-large {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.marker-cluster-large div {
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+  font-weight: bold;
+}
+
+.marker-cluster {
+  border-radius: 50%;
+}
+
+.marker-cluster div {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-top: 5px;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.leaflet-cluster-anim .leaflet-marker-icon,
+.leaflet-cluster-anim .leaflet-marker-shadow {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
