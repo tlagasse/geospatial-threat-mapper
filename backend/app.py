@@ -27,7 +27,7 @@ def get_threats():
         cursor.execute('''
             SELECT * FROM threats
             ORDER BY timestamp DESC
-            LIMIT 100
+            LIMIT 200
         ''')
         rows = cursor.fetchall()
         conn.close()

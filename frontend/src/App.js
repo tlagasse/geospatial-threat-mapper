@@ -1,3 +1,4 @@
+import Timeline from './components/Timeline';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ThreatMap from './components/ThreatMap';
@@ -10,6 +11,8 @@ function App() {
   const [filteredThreats, setFilteredThreats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [countryFilter, setCountryFilter] = useState(null);
+  const [timeFilter, setTimeFilter] = useState(null);
 
   useEffect(() => {
     const fetchThreats = async () => {
@@ -28,9 +31,35 @@ function App() {
   }, []);
 
   const handleFilterChange = (filtered) => {
-    setFilteredThreats(filtered);
+    setCountryFilter(filtered)
+    applyAllFilters(filtered, timeFilter);
   };
   
+  const handleTimeRangeChange = (filtered) => {
+    setTimeFilter(filtered);
+    applyAllFilters(countryFilter, filtered);
+  };
+
+  const applyAllFilters = (countryFiltered, timeFiltered) => {
+  let result = allThreats;
+  
+  // Apply country/search filter if exists
+  if (countryFiltered) {
+    result = countryFiltered;
+  }
+  
+  // Then apply time filter on top of that
+  if (timeFiltered && countryFiltered) {
+    // Find IPs that exist in BOTH filters
+    const timeFilteredIPs = new Set(timeFiltered.map(t => t.ip));
+    result = countryFiltered.filter(t => timeFilteredIPs.has(t.ip));
+  } else if (timeFiltered) {
+    result = timeFiltered;
+  }
+  
+  setFilteredThreats(result);
+};
+
   const handleRefresh = async () => {
   setRefreshing(true);
   try {
@@ -73,11 +102,14 @@ function App() {
           </button>
         </div>
       </header>    
-      
       <StatsPanel />
       <FilterPanel 
         threats={allThreats} 
         onFilterChange={handleFilterChange}
+      />
+      <Timeline
+        threats={allThreats}
+        onTimeRangeChange={handleTimeRangeChange}
       />
       <ThreatMap filteredThreats={filteredThreats} />
     </div>
