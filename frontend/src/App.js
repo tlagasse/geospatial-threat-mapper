@@ -14,6 +14,7 @@ function App() {
   const [countryFilter, setCountryFilter] = useState(null);
   const [timeFilter, setTimeFilter] = useState(null);
 
+  
   useEffect(() => {
     const fetchThreats = async () => {
       try {

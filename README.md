@@ -29,6 +29,7 @@ A production-ready web platform that visualizes real cyber threats on an interac
 - **📱 Responsive Design**: Fully functional on desktop, tablet, and mobile devices
 - **🚀 RESTful API**: Flask backend with `/threats`, `/stats`, and `/refresh` endpoints
 - **⚡ Performance Optimized**: Limited to 100 most recent threats for fast loading
+- **📅 Timeline Filtering**: Filter threats by time range - Last 24 Hours, 7 Days, 30 Days, or All Time with threat counts for each period
 
 ## 🛠️ Tech Stack
 
@@ -168,7 +169,7 @@ sudo systemctl start threat-collector.service
 - [x] Cluster count badges
 - [x] Fade-in animations for marker
 - [x] Smooth cluster animations on hover
-- [ ] Timeline/historical view
+- [x] Timeline/historical view (24h, 7d, 30d, All Time)
 - [ ] Animation of threats over time
 - [ ] Threat type categorization
 

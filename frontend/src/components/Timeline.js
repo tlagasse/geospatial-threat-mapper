@@ -7,9 +7,9 @@ function Timeline({ threats, onTimeRangeChange }) {
 
   useEffect(() => {
     filterByTimeRange(timeRange);
-  }, [timeRange, customDays, threats]);
+  }, [timeRange, customDays]);
 
-  const filterByTimeRange = (range) => {
+  const filterByTimeRange = (range) => { 
     if (range === 'all') {
       onTimeRangeChange(threats);
       return;
@@ -40,7 +40,7 @@ function Timeline({ threats, onTimeRangeChange }) {
       const threatDate = new Date(threat.timestamp);
       return threatDate >= cutoffDate;
     });
-
+    
     onTimeRangeChange(filtered);
   };
 
@@ -73,7 +73,7 @@ function Timeline({ threats, onTimeRangeChange }) {
       </div>
 
       <div className="timeline-buttons">
-        <button
+              <button
           className={`timeline-btn ${timeRange === '24h' ? 'active' : ''}`}
           onClick={() => setTimeRange('24h')}
         >
@@ -104,7 +104,7 @@ function Timeline({ threats, onTimeRangeChange }) {
           All Time
           <span className="threat-count">{threats.length}</span>
         </button>
-      </div>
+    </div>
 
       {timeRange === 'custom' && (
         <div className="custom-range">

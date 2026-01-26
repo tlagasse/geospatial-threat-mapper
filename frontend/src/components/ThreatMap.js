@@ -85,7 +85,8 @@ useEffect(() => {
 
   return (
   <div className="map-container">
-    <MapContainer 
+    <MapContainer
+        key={threats.length}
         center={[20, 0]} 
         zoom={2} 
         style={{ height: '100vh', width: '100%' }}
@@ -96,27 +97,28 @@ useEffect(() => {
         />
       
       <MarkerClusterGroup
+        key={'cluster-${threats.length}'}
         showCoverageOnHover={false}
         spiderfyDistanceMultiplier={2}
         maxClusterRadius={50}
       >
         {threats.map((threat) => (
-          <Marker
-            key={threat.id}
-            position={[threat.latitude, threat.longitude]}
-            icon={getThreatIcon(threat.confidence_score)}
-          >
+        <Marker
+          key={threat.id}
+          position={[threat.latitude, threat.longitude]}
+          icon={getThreatIcon(threat.confidence_score)}
+        >
             <Popup>
-  <div>
-    <h3>🚨 Threat Detected</h3>
-    <p><strong>IP:</strong> {threat.ip}</p>
-    <p><strong>Location:</strong> {threat.city}, {threat.country}</p>
-    <p><strong>Confidence:</strong> {threat.confidence_score}%</p>
-    <p><strong>Type:</strong> {threat.threat_type}</p>
-    <p><strong>Last Seen:</strong> {new Date(threat.last_seen).toLocaleString()}</p>
-  </div>
-</Popup>
-          </Marker>
+              <div>
+                <h3>🚨 Threat Detected</h3>
+                <p><strong>IP:</strong> {threat.ip}</p>
+                <p><strong>Location:</strong> {threat.city}, {threat.country}</p>
+                <p><strong>Confidence:</strong> {threat.confidence_score}%</p>
+                <p><strong>Type:</strong> {threat.threat_type}</p>
+                <p><strong>Last Seen:</strong> {new Date(threat.last_seen).toLocaleString()}</p>
+              </div>
+          </Popup>
+        </Marker>
         ))}
       </MarkerClusterGroup>
 
