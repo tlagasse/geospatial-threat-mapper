@@ -148,3 +148,42 @@
   justify-content: center;
   font-size: 14px;
 }
+
+.map-wrapper {
+  position: relative;
+  height: calc(100vh - 100px);
+  width: 100%;
+  transition: margin-left 0.3s ease;
+}
+
+/* Ensure map container fills space correctly */
+.map-container {
+  height: 100% !important;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.threat-count-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .header-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .threat-count-badge {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -125,7 +125,6 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
   return (
     <div className="filter-panel">
       <div className="filter-group">
-        <label htmlFor="country-filter">🌍 Filter by Country:</label>
         <select 
           id="country-filter"
           value={selectedCountry} 
@@ -142,7 +141,6 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
       </div>
 
       <div className="filter-group">
-        <label htmlFor="ip-search">🔍 Search IP or City:</label>
         <input
           id="ip-search"
           type="text"
@@ -153,8 +151,11 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
         />
       </div>
 
-      <div className="filter-group">
-        <label htmlFor="confidence-slider">🎚️ Min Confidenc: {confidenceMin}%</label>
+      <div className="filter-group confidence-group">
+        <div className="slider-header">
+          <span className="slider-label">Min Confidence</span>
+          <span className="slider-value">{confidenceMin}%</span>
+        </div>
         <input
           id="confidence-slider"
           type="range"
@@ -164,20 +165,11 @@ const countries = ['all', ...Array.from(countryCodesSet).map(code => ({
           onChange={handleConfidenceChange}
           className="confidence-slider"
         />
-        <div className="slider-labels">
-          <span>50%</span>
-          <span>75%</span>
-          <span>100%</span>
-        </div>
       </div>
 
       <button onClick={handleReset} className="reset-button">
         Clear Filters
       </button>
-
-      <div className="filter-info">
-        Showing {threats.length} threats
-      </div>
     </div>
   );
 }

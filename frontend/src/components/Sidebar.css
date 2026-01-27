@@ -1,0 +1,219 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 78px;
+  background: #11101d;
+  padding: 6px 14px;
+  transition: all 0.3s ease;
+  z-index: 2000;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 350px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  min-width: 50px;
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open .logo-text {
+  opacity: 1;
+}
+
+.nav-links {
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.nav-links li:hover {
+  background: #1d1b31;
+}
+
+.nav-links li.active {
+  background: #667eea;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-links .icon {
+  min-width: 50px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.link-text {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidebar.open .link-text {
+  opacity: 1;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: 88px;
+  z-index: 2001;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.sidebar-toggle:hover {
+  background: #764ba2;
+  transform: scale(1.05);
+}
+
+.sidebar-toggle.open {
+  left: 360px;
+}
+
+.sidebar-panel {
+  margin-top: 20px;
+  padding: 15px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Adjust components inside sidebar */
+.sidebar-panel .stats-panel,
+.sidebar-panel .filter-panel,
+.sidebar-panel .timeline-panel {
+  background: transparent;
+  box-shadow: none;
+  padding: 10px 0;
+  color: #fff;
+}
+
+.sidebar-panel .stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-panel .stat-value,
+.sidebar-panel .stat-label,
+.sidebar-panel .country-name {
+  color: #fff;
+}
+
+.sidebar-panel .filter-select,
+.sidebar-panel .filter-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.sidebar-panel .filter-select option {
+  background: #11101d;
+  color: #fff;
+}
+
+.sidebar-panel .timeline-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.sidebar-panel .timeline-btn.active {
+  background: #667eea;
+  border-color: #667eea;
+}
+
+.sidebar-panel label {
+  color: #fff;
+}
+
+/* Scrollbar styling */
+.sidebar-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.sidebar-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.sidebar-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .sidebar.open {
+    width: 280px;
+  }
+  
+  .sidebar-toggle.open {
+    left: 240px;
+  }
+}

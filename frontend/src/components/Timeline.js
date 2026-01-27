@@ -67,11 +67,6 @@ function Timeline({ threats, onTimeRangeChange }) {
 
   return (
     <div className="timeline-panel">
-      <div className="timeline-header">
-        <span className="timeline-icon">📅</span>
-        <span className="timeline-label">Time Range:</span>
-      </div>
-
       <div className="timeline-buttons">
               <button
           className={`timeline-btn ${timeRange === '24h' ? 'active' : ''}`}

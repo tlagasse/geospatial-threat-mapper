@@ -1,32 +1,32 @@
 .stats-panel {
   display: flex;
-  gap: 20px;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: transparent;
   color: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  overflow-x: auto;
+  box-shadow: none;
 }
 
 .stat-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 20px;
-  min-width: 150px;
+  border-radius: 8px;
+  padding: 12px 15px;
+  width: 100%;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .top-countries {
-  min-width: 250px;
+  width: 100%;
   text-align: left;
 }
 
 .stat-value {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .stat-value-small {
@@ -36,9 +36,9 @@
 }
 
 .stat-label {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   opacity: 0.9;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .country-list {
@@ -48,8 +48,9 @@
 .country-item {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0;
+  padding: 3px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
 }
 
 .country-item:last-child {
@@ -57,13 +58,13 @@
 }
 
 .country-name {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 .country-count {
   font-weight: bold;
   background: rgba(255, 255, 255, 0.2);
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.85rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 0.7rem;
 }

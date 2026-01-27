@@ -1,3 +1,4 @@
+import Sidebar from './components/Sidebar';
 import Timeline from './components/Timeline';
 import React, { useState, useEffect } from 'react';
 import './App.css';
@@ -82,39 +83,56 @@ function App() {
   }
 };
 
-  if (loading) {
-    return <div className="loading">Loading threat data...</div>;
-  }
+if (loading) {
+  return <div className="loading">Loading threat data...</div>;
+}
 
-  return (
-    <div className="App">
-      <header className="app-header">
-        <div className="header-content">
-          <div>
-            <h1>🌍 Geospatial Threat Intelligence Mapper</h1>
-            <p>Real-time visualization of cyber threats worldwide</p>
-          </div>
-          <button 
-            onClick={handleRefresh} 
-            disabled={refreshing}
-            className="refresh-button"
-          >
-            {refreshing ? '🔄 Refreshing...' : '🔄 Refresh Data'}
-          </button>
+return (
+  <div className="App">
+    <header className="app-header">
+      <div className="header-content">
+        <div>
+          <h1>🌍 Geospatial Threat Intelligence Mapper</h1>
+          <p>Real-time visualization of cyber threats worldwide</p>
         </div>
-      </header>    
-      <StatsPanel />
+        <div className="header-actions">
+          <span className="threat-count-badge">
+            Showing {filteredThreats.length} threats
+          </span>
+        <button 
+          onClick={handleRefresh} 
+          disabled={refreshing}
+          className="refresh-button"
+        >
+          {refreshing ? '🔄 Refreshing...' : '🔄 Refresh Data'}
+        </button>
+      </div>
+    </div>
+  </header>
+   
+  <Sidebar 
+    statsContent={<StatsPanel />}
+    filterContent={
       <FilterPanel 
         threats={allThreats} 
         onFilterChange={handleFilterChange}
       />
-      <Timeline
+    }
+    timelineContent={
+      <Timeline 
         threats={allThreats}
         onTimeRangeChange={handleTimeRangeChange}
       />
+    }
+  />
+    
+    
+    <div className="map-wrapper">
       <ThreatMap filteredThreats={filteredThreats} />
     </div>
-  );
+  </div>
+);
+
 }
 
 export default App;
