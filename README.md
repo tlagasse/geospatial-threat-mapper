@@ -11,25 +11,26 @@ A production-ready web platform that visualizes real cyber threats on an interac
 
 - **🗺️ Interactive World Map**: Real-time visualization using Leaflet.js with smooth zoom and pan
 - **📍 Live Threat Intelligence**: Integrated with AbuseIPDB API - displays actual malicious IPs with confidence scores
+- **🎨 Modern Collapsible Sidebar**: Dark-themed navigation with icon-based menu system
 - **🌐 Global Coverage**: Threats from 10+ countries across all continents
 - **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping with city-level precision
 - **💾 SQLite Database**: Persistent storage with automated cleanup (30-day expiration)
 - **🎨 Color-Coded Markers**: Dynamic threat severity visualization - red (90-100%), orange (75-90%), yellow (50-75%)
 - **🕷️ Marker Clustering**: Automatic grouping of nearby threats with count badges - click to expand and explore
-- **🎨 Smooth Animations**: Fade-in effects for markers, smooth cluster transitions, and hover effects
+- **🎭 Smooth Animations**: Fade-in effects for markers, smooth cluster transitions, and hover effects
 - **📊 Statistics Dashboard**: Real-time metrics showing total threats, average confidence, top countries, and last update time
 - **🔍 Advanced Filtering**: 
   - Filter by country dropdown with full country names
   - Search by IP address or city name
   - Confidence score slider (50-100%)
-  - Real-time threat counter
+  - Real-time threat counter in header
+- **📅 Timeline Filtering**: Filter threats by time range - Last 24 Hours, 7 Days, 30 Days, or All Time with threat counts for each period
 - **🔄 Manual Refresh**: One-click data refresh to fetch latest threats from AbuseIPDB
-- **🤖 Automated Data Collection**: Background service runs every 6 hours via systemd
+- **🤖 Automated Data Collection**: Background service runs every 6 hours via systemd (optional)
 - **🗑️ Data Management**: Automatic deduplication and 30-day threat expiration
 - **📱 Responsive Design**: Fully functional on desktop, tablet, and mobile devices
 - **🚀 RESTful API**: Flask backend with `/threats`, `/stats`, and `/refresh` endpoints
-- **⚡ Performance Optimized**: Limited to 100 most recent threats for fast loading
-- **📅 Timeline Filtering**: Filter threats by time range - Last 24 Hours, 7 Days, 30 Days, or All Time with threat counts for each period
+- **⚡ Performance Optimized**: Limited to 200 most recent threats for fast loading
 
 ## 🛠️ Tech Stack
 
@@ -120,21 +121,25 @@ sudo systemctl start threat-collector.service
 
 ## 📸 Screenshots
 
-### Full Application Overview
-![Full Application](screenshots/full-application.png)
-*Complete threat intelligence dashboard featuring real-time statistics, interactive filtering, and global threat visualization*
+### Full Map View - Global Threat Visualization
+![Full Map View](screenshots/full-map-view.png)
+*Interactive world map showing real-time cyber threats with marker clustering. Clean, minimalist interface with collapsible sidebar.*
 
 ### Statistics Dashboard
-![Statistics Dashboard](screenshots/stats-dashboard.png)
-*Live metrics showing total threats, average confidence score, and top 5 affected countries*
+![Statistics Panel](screenshots/sidebar-statistics.png)
+*Compact vertical statistics showing total threats, average confidence score, top 5 affected countries, and total countries represented.*
 
-### Interactive Filtering System
-![Active Filters](screenshots/filters-active.png)
-*Filter threats by country, search by IP address or city name, adjust confidence threshold with slider*
+### Advanced Filtering
+![Filters Panel](screenshots/sidebar-filters.png)
+*Intuitive filtering by country, IP/city search, and confidence score slider with real-time threat counter.*
 
-### Detailed Threat Information
-![Threat Details](screenshots/threat-detail-popup.png)
-*Click any marker to view comprehensive threat intelligence*
+### Timeline-Based Analysis
+![Timeline Panel](screenshots/sidebar-timeline.png)
+*Historical threat filtering with time range buttons showing threat counts for different periods (24 hours, 7 days, 30 days, all time).*
+
+### Detailed Threat Intelligence
+![Threat Detail](screenshots/threat-detail.png)
+*Click any threat marker to view comprehensive information: IP address, precise location, confidence score, threat type, and last seen timestamp.*
 
 ## 🗺️ Development Roadmap
 
