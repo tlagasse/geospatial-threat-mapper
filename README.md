@@ -192,27 +192,6 @@ sudo systemctl start threat-collector.service
 - [x] Performance monitoring and cleanup tools
 - [x] Footer and About section
 
-
-
-### Phase 4: Intelligence Features
-- [ ] Pattern-of-life analysis for persistent IPs
-- [ ] Threat actor attribution
-- [ ] ASN (Autonomous System Number) tracking
-- [ ] Geofencing alerts
-- [ ] Export reports (PDF/CSV/JSON)
-- [ ] Multi-source threat feed integration
-
-### Phase 5: Production & Deployment
-- [ ] Migrate to PostgreSQL with PostGIS
-- [ ] Add user authentication
-- [ ] Rate limiting on API
-- [ ] Caching layer (Redis)
-- [ ] Docker containerization
-- [ ] Deploy to cloud (AWS/DigitalOcean)
-- [ ] CI/CD pipeline with GitHub Actions
-- [ ] Comprehensive API documentation
-- [ ] Demo video
-
 ## 🎓 Skills Demonstrated
 
 - **Full-stack Development**: React frontend + Flask backend
