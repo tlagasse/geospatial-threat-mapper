@@ -130,3 +130,28 @@ def refresh_data():
         }), 500
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+@app.route('/api/cleanup', methods=['POST'])
+def cleanup_old_threats():
+    """Remove threats older than 30 days"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Delete threats older than 30 days
+        cursor.execute('''
+            DELETE FROM threats 
+            WHERE datetime(timestamp) < datetime('now', '-30 days')
+        ''')
+        
+        deleted = cursor.rowcount
+        conn.commit()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'deleted': deleted,
+            'message': f'Removed {deleted} old threats'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

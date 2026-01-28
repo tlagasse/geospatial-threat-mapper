@@ -1,36 +1,53 @@
 # 🌍 Geospatial Threat Intelligence Mapper
 
-A production-ready web platform that visualizes real cyber threats on an interactive map, combining geospatial intelligence analysis techniques with modern cybersecurity threat hunting.
+A real-time cybersecurity threat visualization platform that combines geospatial analysis techniques with modern web technologies,
 
-![Full Application](screenshots/full-application.png)
+**Live threat data from AbuseIPDB displayed on an interactive world map with advanced filtering, timeline analysis, and intelligent clustering.**
+
+[View Screenshots](#-screenshots) | [Features](#-current-features) | [Tech Stack](#-tech-stack) | [Installation](#-installation)
 
 ## 🚀 Project Status
 ✅ **PRODUCTION-READY** - Automated collection of 100+ real malicious IPs every 6 hours from AbuseIPDB
 
 ## ✨ Current Features
 
-- **🗺️ Interactive World Map**: Real-time visualization using Leaflet.js with smooth zoom and pan
-- **📍 Live Threat Intelligence**: Integrated with AbuseIPDB API - displays actual malicious IPs with confidence scores
-- **🎨 Modern Collapsible Sidebar**: Dark-themed navigation with icon-based menu system
-- **🌐 Global Coverage**: Threats from 10+ countries across all continents
-- **🎯 Intelligent Geolocation**: Automatic IP-to-location mapping with city-level precision
-- **💾 SQLite Database**: Persistent storage with automated cleanup (30-day expiration)
-- **🎨 Color-Coded Markers**: Dynamic threat severity visualization - red (90-100%), orange (75-90%), yellow (50-75%)
-- **🕷️ Marker Clustering**: Automatic grouping of nearby threats with count badges - click to expand and explore
-- **🎭 Smooth Animations**: Fade-in effects for markers, smooth cluster transitions, and hover effects
-- **📊 Statistics Dashboard**: Real-time metrics showing total threats, average confidence, top countries, and last update time
-- **🔍 Advanced Filtering**: 
-  - Filter by country dropdown with full country names
-  - Search by IP address or city name
-  - Confidence score slider (50-100%)
-  - Real-time threat counter in header
-- **📅 Timeline Filtering**: Filter threats by time range - Last 24 Hours, 7 Days, 30 Days, or All Time with threat counts for each period
-- **🔄 Manual Refresh**: One-click data refresh to fetch latest threats from AbuseIPDB
-- **🤖 Automated Data Collection**: Background service runs every 6 hours via systemd (optional)
-- **🗑️ Data Management**: Automatic deduplication and 30-day threat expiration
-- **📱 Responsive Design**: Fully functional on desktop, tablet, and mobile devices
-- **🚀 RESTful API**: Flask backend with `/threats`, `/stats`, and `/refresh` endpoints
-- **⚡ Performance Optimized**: Limited to 200 most recent threats for fast loading
+### 🗺️ Interactive Visualization
+- **Real-time World Map**: Smooth Leaflet.js integration with zoom, pan, and interactive controls
+- **Live Threat Intelligence**: Integrated with AbuseIPDB API - displays actual malicious IPs with confidence scores
+- **Global Coverage**: Threats from 10+ countries across all continents with city-level precision
+- **Color-Coded Severity**: Dynamic markers (🔴 90-100%, 🟠 75-90%, 🟡 50-75%)
+
+### 🎨 Modern User Interface
+- **Collapsible Dark Sidebar**: Icon-based navigation with Statistics, Filters, Timeline, and About sections
+- **Smooth Animations**: Fade-in effects, cluster transitions, and hover interactions
+- **Responsive Design**: Fully functional on desktop, tablet, and mobile devices
+- **Professional Footer**: Contact information and technology stack display
+
+### 📊 Analytics & Insights
+- **Real-time Statistics Dashboard**: Total threats, average confidence, top 5 countries, global reach
+- **Marker Clustering**: Automatic grouping of nearby threats with expandable cluster badges
+- **Timeline Analysis**: Filter by Last 24 Hours, 7 Days, 30 Days, or All Time
+- **Pattern Recognition**: Vertical stat cards showing threat distribution and trends
+
+### 🔍 Advanced Filtering
+- **Country Filter**: Dropdown with full country names and flags
+- **IP/City Search**: Real-time search across IP addresses and city names
+- **Confidence Slider**: Adjustable threshold (50-100%) with visual gradient
+- **Live Threat Counter**: Real-time count displayed in header
+
+### 🛠️ Data Management
+- **SQLite Database**: Persistent storage with automatic deduplication
+- **30-Day Auto-Expiration**: Automatic cleanup of old threats
+- **Performance Monitoring**: Warning banner when database exceeds 200 threats
+- **One-Click Cleanup**: Remove old threats with confirmation dialog
+- **Manual Refresh**: On-demand data collection from AbuseIPDB
+- **Optional Automation**: Systemd service for scheduled collection (every 6 hours)
+
+### 🚀 Technical Excellence
+- **RESTful API**: Flask backend with `/threats`, `/stats`, `/refresh`, `/cleanup` endpoints
+- **Performance Optimized**: Limited to 200 most recent threats for fast rendering
+- **Error Handling**: Graceful degradation with user-friendly error messages
+- **Geolocation Intelligence**: Automatic IP-to-location mapping with fallback handling
 
 ## 🛠️ Tech Stack
 
@@ -50,10 +67,6 @@ A production-ready web platform that visualizes real cyber threats on an interac
 **Data Sources:**
 - AbuseIPDB API (real-time threat intelligence)
 - ipinfo.io (IP geolocation)
-
-## 🎯 Background
-
-This project combines my experience as a former military intelligence analyst (FMV/GEOINT) with cybersecurity, applying pattern-of-life analysis and geospatial techniques to threat intelligence. The goal is to provide SOC analysts and security researchers with an intuitive visual tool for understanding global threat landscapes.
 
 ## 🔧 Installation & Setup
 
@@ -169,14 +182,17 @@ sudo systemctl start threat-collector.service
 - [x] Statistics dashboard with live metrics
 - [x] Last updated timestamp display
 
-### Phase 3: Advanced Visualization 🚧 NEXT
+### Phase 3: Advanced Visualization ✅ COMPLETE
 - [x] Marker clustering for dense areas
-- [x] Cluster count badges
+- [x] Cluster count badges with color coding
 - [x] Fade-in animations for marker
 - [x] Smooth cluster animations on hover
-- [x] Timeline/historical view (24h, 7d, 30d, All Time)
-- [ ] Animation of threats over time
-- [ ] Threat type categorization
+- [x] Timeline/historical view
+- [x] Collapsible sidebar navigation
+- [x] Performance monitoring and cleanup tools
+- [x] Footer and About section
+
+
 
 ### Phase 4: Intelligence Features
 - [ ] Pattern-of-life analysis for persistent IPs

@@ -1,3 +1,4 @@
+import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import Timeline from './components/Timeline';
 import React, { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import FilterPanel from './components/FilterPanel';
 import axios from 'axios';
 
 function App() {
+  const [showLimitWarning, setShowLimitWarning] = useState(false);
   const [allThreats, setAllThreats] = useState([]);
   const [filteredThreats, setFilteredThreats] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +33,15 @@ function App() {
 
     fetchThreats();
   }, []);
+
+  useEffect(() => {
+  // Check if we're over the limit
+  if (allThreats.length > 200) {
+    setShowLimitWarning(true);
+  } else {
+    setShowLimitWarning(false);
+  }
+}, [allThreats]);
 
   const handleFilterChange = (filtered) => {
     setCountryFilter(filtered)
@@ -83,6 +94,22 @@ function App() {
   }
 };
 
+const handleCleanup = async () => {
+  if (window.confirm('Remove threats older than 30 days?')) {
+    try {
+      await axios.post('http://localhost:5000/api/cleanup');
+      // Refresh data
+      const response = await axios.get('http://localhost:5000/api/threats');
+      setAllThreats(response.data);
+      setFilteredThreats(response.data);
+      setShowLimitWarning(false);
+    } catch (err) {
+      console.error('Error cleaning up data:', err);
+      alert('Failed to cleanup data. Please try again.');
+    }
+  }
+};
+
 if (loading) {
   return <div className="loading">Loading threat data...</div>;
 }
@@ -109,6 +136,22 @@ return (
       </div>
     </div>
   </header>
+
+  {showLimitWarning && (
+  <div className="warning-banner">
+    <span className="warning-icon">⚠️</span>
+    <span className="warning-text">
+      Database has {allThreats.length} threats (recommended: 200). 
+      Performance may be impacted.
+    </span>
+    <button className="warning-button" onClick={handleCleanup}>
+      Clean Up Old Threats
+    </button>
+    <button className="warning-close" onClick={() => setShowLimitWarning(false)}>
+      ✕
+    </button>
+  </div>
+)}
    
   <Sidebar 
     statsContent={<StatsPanel />}
@@ -130,6 +173,8 @@ return (
     <div className="map-wrapper">
       <ThreatMap filteredThreats={filteredThreats} />
     </div>
+
+    <Footer />
   </div>
 );
 
